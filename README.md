@@ -1,2 +1,1 @@
-# asyara-kids
-syara
+https://asyarakids.id
