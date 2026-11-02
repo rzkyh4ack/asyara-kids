@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /cari.html
+Disallow: /assets/
+
+Sitemap: https://[GANTI:domainanda.com]/sitemap.xml

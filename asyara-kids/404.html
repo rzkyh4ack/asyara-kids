@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Tidak Ditemukan - Asyara Kids</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+  <div class="bg-doodles" id="bgDoodles" aria-hidden="true"></div>
+
+  <header>
+    <nav aria-label="Navigasi utama">
+      <a href="/index.html" class="logo"><span class="bear">🧸</span> Asyara<span>Kids</span></a>
+      <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/katalog.html">Katalog</a></li>
+        <li><a href="/tentang.html">Tentang</a></li>
+        <li><a href="/kontak.html">Kontak</a></li>
+      </ul>
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Buka keranjang belanja">
+        🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="notfound-wrap">
+    <span class="big-emoji">🧸</span>
+    <h1>Oops! 404</h1>
+    <p>Sepertinya boneka kita salah jalan. Halaman yang Anda cari tidak ditemukan.</p>
+    <a href="/katalog.html" class="btn" style="text-decoration:none; display:inline-block;">Kembali ke Katalog →</a>
+  </main>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar" aria-label="Keranjang belanja">
+    <div class="cart-header">
+      <h2>🛒 Keranjang Belanja</h2>
+      <button class="close-cart" onclick="toggleCart()" aria-label="Tutup">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total:</span><span id="cartTotal">Rp 0</span></div>
+      <button class="checkout-btn" onclick="checkout()">Checkout via WhatsApp 🎁</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/assets/products.js"></script>
+  <script src="/assets/script.js"></script>
+</body>
+</html>

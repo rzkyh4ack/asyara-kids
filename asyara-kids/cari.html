@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cari Produk - Asyara Kids</title>
+  <meta name="description" content="Cari baju anak di Asyara Kids. Temukan kaos, dress, setelan, piyama, dan lainnya dengan cepat.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://[GANTI:domainanda.com]/cari.html">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <div class="bg-doodles" id="bgDoodles" aria-hidden="true"></div>
+
+  <header>
+    <nav aria-label="Navigasi utama">
+      <a href="index.html" class="logo"><span class="bear">🧸</span> Asyara<span>Kids</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="tentang.html">Tentang</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+      <form class="nav-search" onsubmit="event.preventDefault(); window.location.href='cari.html?q=' + encodeURIComponent(this.q.value);">
+        <input type="text" name="q" placeholder="Cari baju..." aria-label="Cari produk">
+        <button type="submit" aria-label="Cari">🔍</button>
+      </form>
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Buka keranjang belanja">
+        🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="katalog">
+    <h1 class="section-title"><span class="deco">✦</span> Hasil Pencarian <span class="deco">✦</span></h1>
+    <p class="search-info" id="searchInfo">Masukkan kata kunci di kolom pencarian.</p>
+    <div class="products" id="productGrid"></div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>🧸 Asyara Kids</h3>
+        <p>Toko baju anak rumahan dengan koleksi lucu, bahan pilihan, dan sentuhan kasih di setiap jahitan.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Menu</h3>
+        <a href="index.html">Home</a>
+        <a href="katalog.html">Katalog</a>
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
+      </div>
+      <div class="footer-col">
+        <h3>Layanan</h3>
+        <a href="cara-pemesanan.html">Cara Pemesanan</a>
+        <a href="kebijakan-retur.html">Kebijakan Retur</a>
+      </div>
+      <div class="footer-col">
+        <h3>Ikuti Kami</h3>
+        <a href="https://instagram.com/asyarakids" rel="noopener noreferrer" target="_blank">📷 Instagram</a>
+        <a href="https://facebook.com/asyarakids" rel="noopener noreferrer" target="_blank">📘 Facebook</a>
+        <a href="https://tiktok.com/@asyarakids" rel="noopener noreferrer" target="_blank">🎵 TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Asyara Kids. Dibuat dengan <span class="heart">♥</span> untuk si kecil.
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar" aria-label="Keranjang belanja">
+    <div class="cart-header">
+      <h2>🛒 Keranjang Belanja</h2>
+      <button class="close-cart" onclick="toggleCart()" aria-label="Tutup">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total:</span><span id="cartTotal">Rp 0</span></div>
+      <button class="checkout-btn" onclick="checkout()">Checkout via WhatsApp 🎁</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/products.js"></script>
+  <script src="assets/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const q = (params.get('q') || '').trim().toLowerCase();
+      const info = document.getElementById('searchInfo');
+      const grid = document.getElementById('productGrid');
+
+      if (!q) {
+        info.innerHTML = 'Masukkan kata kunci di kolom pencarian di atas.';
+        return;
+      }
+
+      const results = PRODUCTS.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q) ||
+        p.catLabel.toLowerCase().includes(q)
+      );
+
+      if (results.length === 0) {
+        info.innerHTML = `Tidak ada produk untuk <strong>"${escapeHTML(q)}"</strong>. Coba kata kunci lain, ya.`;
+        return;
+      }
+
+      info.innerHTML = `Menampilkan <strong>${results.length}</strong> produk untuk <strong>"${escapeHTML(q)}"</strong>`;
+      grid.innerHTML = results.map(p => productCardHTML(p, '')).join('');
+    });
+  </script>
+</body>
+</html>
